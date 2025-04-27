@@ -195,6 +195,53 @@ module.exports = {
 					await self.sim.Simulator.updateSendGlobalData(self, 'SETLAYOUT', action.options)
 				},
 			},
+			setSize: {
+				name: 'Set Tally Count',
+				options: [
+					{
+						type: 'textinput',
+						label: 'Rows',
+						id: 'rows',
+						default: '0',
+					},
+					{
+						type: 'textinput',
+						label: 'Columns',
+						id: 'cols',
+						default: '0',
+					},
+				],
+				callback: async (action) => {
+					// TODO(Peter): Ensure its a number
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETSIZE', action.options)
+				},
+			},
+			storeImage: {
+				name: 'Store Image',
+				options: [
+					{
+						type: 'textinput',
+						label: 'Name',
+						id: 'name',
+					},
+					{
+						type: 'textinput',
+						label: 'Image (base 64 encoded)',
+						id: 'image',
+					},
+				],
+				callback: async (action) => {
+					// TODO(Peter): Ensure its valid base 64 data
+					await self.sim.Simulator.updateSendGlobalData(self, 'STOREIMAGE', action.options)
+				},
+			},
+			clearImages: {
+				name: 'Clear Images',
+				options: [],
+				callback: async (action) => {
+					await self.sim.Simulator.updateSendGlobalData(self, 'CLEARIMAGES', action.options)
+				},
+			},
 		}
 
 		this.setActionDefinitions(actions)

@@ -27,6 +27,14 @@ var Simulator = (function () {
 			{ id: 'numbers_present', value: 1 },
 			{ id: 'numbers_outside', value: 1 },
 		],
+		SETSIZE: [
+			{ id: 'rows', value: 0 },
+			{ id: 'cols', value: 0 },
+		],
+		// Below are commands which need custom handling...
+		IMAGES: {},
+		// Dummy command specifications
+		STOREIMAGE: [{ id: 'name' }, { id: 'image' }],
 	}
 
 	function handleConnection(socket) {
