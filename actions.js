@@ -1,3 +1,5 @@
+const { combineRgb } = require('@companion-module/base')
+
 module.exports = {
 	initActions(self) {
 		const actions = {
@@ -72,7 +74,7 @@ module.exports = {
 				name: 'Set Region Count',
 				options: [
 					{
-						type: 'textinput',
+						type: 'number',
 						label: 'Region Count',
 						id: 'count',
 						default: '2',
@@ -199,13 +201,13 @@ module.exports = {
 				name: 'Set Tally Count',
 				options: [
 					{
-						type: 'textinput',
+						type: 'number',
 						label: 'Rows',
 						id: 'rows',
 						default: '0',
 					},
 					{
-						type: 'textinput',
+						type: 'number',
 						label: 'Columns',
 						id: 'cols',
 						default: '0',
@@ -214,6 +216,162 @@ module.exports = {
 				callback: async (action) => {
 					// TODO(Peter): Ensure its a number
 					await self.sim.Simulator.updateSendGlobalData(self, 'SETSIZE', action.options)
+				},
+			},
+			setRow: {
+				name: 'Set Columns Override',
+				options: [
+					{
+						type: 'number',
+						label: 'Rows',
+						id: 'rows',
+						default: '0',
+					},
+					{
+						type: 'number',
+						label: 'Columns Override',
+						id: 'cols',
+						default: '0',
+					},
+				],
+				callback: async (action) => {
+					// TODO(Peter): Ensure its a number
+					// Deal with the array stuff
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETROW', action.options)
+				},
+			},
+			setTally: {
+				name: 'Set Tally',
+				options: [
+					{
+						type: 'number',
+						label: 'Row',
+						id: 'row',
+						default: '0',
+					},
+					{
+						type: 'number',
+						label: 'Column',
+						id: 'col',
+						default: '0',
+					},
+					{
+						type: 'colorpicker',
+						label: 'Foreground Colour',
+						id: 'fg_colour',
+						default: combineRgb(218, 218, 218),
+						returnType: 'number',
+					},
+					{
+						type: 'colorpicker',
+						label: 'Background Colour',
+						id: 'bg_colour',
+						default: combineRgb(255, 0, 0),
+						returnType: 'number',
+					},
+					{
+						type: 'textinput',
+						label: 'Text',
+						id: 'text',
+						default: 'Test Tally',
+					},
+				],
+				callback: async (action) => {
+					// TODO(Peter): Ensure values are valid
+					// Deal with the array stuff
+					action.options.fg_colour = action.options.fg_colour.toString(16)
+					action.options.bg_colour = action.options.bg_colour.toString(16)
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETTALLY', action.options)
+				},
+			},
+			setLabel: {
+				name: 'Set Label',
+				options: [
+					{
+						type: 'number',
+						label: 'Row',
+						id: 'row',
+						default: '0',
+					},
+					{
+						type: 'number',
+						label: 'Column',
+						id: 'col',
+						default: '0',
+					},
+					{
+						type: 'textinput',
+						label: 'Text',
+						id: 'text',
+						default: 'Test Label',
+					},
+				],
+				callback: async (action) => {
+					// TODO(Peter): Ensure values are valid
+					// Deal with the array stuff
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETLABEL', action.options)
+				},
+			},
+			setCountdown: {
+				name: 'Set Countdown',
+				options: [
+					{
+						type: 'number',
+						label: 'Row',
+						id: 'row',
+						default: '0',
+					},
+					{
+						type: 'number',
+						label: 'Column',
+						id: 'col',
+						default: '0',
+					},
+					{
+						type: 'colorpicker',
+						label: 'Foreground Colour',
+						id: 'fg_colour',
+						default: combineRgb(0, 0, 0),
+						returnType: 'number',
+					},
+					{
+						type: 'colorpicker',
+						label: 'Background Colour',
+						id: 'bg_colour',
+						default: combineRgb(255, 255, 0),
+						returnType: 'number',
+					},
+					{
+						type: 'number',
+						label: 'Target Seconds',
+						id: 'target_secs',
+						default: '0',
+					},
+					{
+						type: 'number',
+						label: 'Target Microseconds',
+						id: 'target_usecs',
+						default: '0',
+					},
+					{
+						type: 'number',
+						label: 'Flash Seconds',
+						id: 'flash',
+						default: '300',
+					},
+					{
+						type: 'textinput',
+						label: 'Label',
+						id: 'label',
+						default: 'Countdown',
+					},
+				],
+				callback: async (action) => {
+					// TODO(Peter): Ensure values are valid
+					// Deal with the array stuff
+					action.options.fg_colour = action.options.fg_colour.toString(16)
+					action.options.bg_colour = action.options.bg_colour.toString(16)
+					await self.sim.Simulator.updateSendGlobalData(self, 'SETCOUNTDOWN', action.options)
 				},
 			},
 			storeImage: {

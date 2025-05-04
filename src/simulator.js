@@ -31,6 +31,33 @@ var Simulator = (function () {
 			{ id: 'rows', value: 0 },
 			{ id: 'cols', value: 0 },
 		],
+		// Below are all tally commands
+		SETROW: [
+			{ id: 'rows', value: 0 },
+			{ id: 'cols', value: 0 },
+		],
+		SETTALLY: [
+			{ id: 'row', value: 0 },
+			{ id: 'col', value: 0 },
+			{ id: 'fg_colour', value: 'FFFFFF' },
+			{ id: 'bg_colour', value: '000000' },
+			{ id: 'text', value: 'Test' },
+		],
+		SETLABEL: [
+			{ id: 'row', value: 0 },
+			{ id: 'col', value: 0 },
+			{ id: 'text', value: 'Test' },
+		],
+		SETCOUNTDOWN: [
+			{ id: 'row', value: 0 },
+			{ id: 'col', value: 0 },
+			{ id: 'fg_colour', value: 'FFFFFF' },
+			{ id: 'bg_colour', value: '000000' },
+			{ id: 'target_secs', value: 0 },
+			{ id: 'target_usecs', value: 0 },
+			{ id: 'flash', value: 0 },
+			{ id: 'label', value: 'Test' },
+		],
 		// Below are commands which need custom handling...
 		IMAGES: {},
 		// Dummy command specifications
